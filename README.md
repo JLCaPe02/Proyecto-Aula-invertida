@@ -4,6 +4,11 @@
 
 Material didáctico completo para la implementación de metodología de aula invertida en el módulo de **Administración de Servicios de Correo Electrónico**. El material está diseñado para alumnado de **Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)**.
 
+### 🔗 Enlaces
+
+- **📖 Documentación Online**: [https://JLCaPe02.github.io/Proyecto-Aula-invertida/](https://JLCaPe02.github.io/Proyecto-Aula-invertida/)
+- **💾 Repositorio GitHub**: [https://github.com/JLCaPe02/Proyecto-Aula-invertida](https://github.com/JLCaPe02/Proyecto-Aula-invertida)
+
 ---
 
 ## Contenidos del Material
