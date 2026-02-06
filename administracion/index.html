@@ -1,0 +1,1530 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación teórica profesional sobre la administración de sistemas de correo electrónico en entornos Linux">
+      
+      
+        <meta name="author" content="Teodoro Sibón Jiménez y José Luis Cabello Pérez">
+      
+      
+      
+        <link rel="prev" href="../dns_infraestructura/">
+      
+      
+        <link rel="next" href="../seguridad/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Administración y Diagnóstico - Administración de Servicios de Correo Electrónico</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#administracion-y-diagnostico-de-servidores-de-correo" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Administración de Servicios de Correo Electrónico" class="md-header__button md-logo" aria-label="Administración de Servicios de Correo Electrónico" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Administración de Servicios de Correo Electrónico
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Administración y Diagnóstico
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartir" aria-label="Compartir" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href=".." class="md-tabs__link">
+          
+  
+  
+    
+  
+  Inicio
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../arquitectura/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Arquitectura y Protocolos
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../dns_infraestructura/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Infraestructura
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../seguridad/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Seguridad
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Administración de Servicios de Correo Electrónico" class="md-nav__button md-logo" aria-label="Administración de Servicios de Correo Electrónico" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Administración de Servicios de Correo Electrónico
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href=".." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Inicio
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../conceptos_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conceptos Básicos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura y Protocolos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitectura y Protocolos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arquitectura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura del Sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protocolos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protocolos de Comunicación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infraestructura
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Infraestructura
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dns_infraestructura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DNS y Correo Electrónico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administración y Diagnóstico
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administración y Diagnóstico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-de-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructura de Configuración
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructura de Configuración">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#postfix-mta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Postfix (MTA)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dovecot-mdaimap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dovecot (MDA/IMAP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diagnostico-y-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diagnóstico y Logs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Diagnóstico y Logs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubicacion-de-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ubicación de Logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#codigos-de-estado-smtp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Códigos de Estado SMTP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-de-analisis-de-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de Análisis de Logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flujo-de-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flujo de Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comandos-esenciales-de-diagnostico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comandos Esenciales de Diagnóstico
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comandos Esenciales de Diagnóstico">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verificacion-de-conectividad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verificación de Conectividad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analisis-de-logs-en-tiempo-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Análisis de Logs en Tiempo Real
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificacion-de-servicios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verificación de Servicios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mejores-practicas-de-administracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mejores Prácticas de Administración
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximos-pasos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Próximos Pasos
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seguridad
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Seguridad
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../seguridad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seguridad y Autenticación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="administracion-y-diagnostico-de-servidores-de-correo">Administración y Diagnóstico de Servidores de Correo<a class="headerlink" href="#administracion-y-diagnostico-de-servidores-de-correo" title="Enlace permanente">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Enlace permanente">&para;</a></h2>
+<p>La administración profesional de un servidor de correo Linux requiere conocimientos sobre  la <strong>estructura de configuración</strong> del software MTA/MDA y la capacidad de <strong>interpretar registros del sistema</strong> (logs) para diagnosticar y resolver problemas eficientemente.</p>
+<hr />
+<h2 id="estructura-de-configuracion">Estructura de Configuración<a class="headerlink" href="#estructura-de-configuracion" title="Enlace permanente">&para;</a></h2>
+<h3 id="postfix-mta">Postfix (MTA)<a class="headerlink" href="#postfix-mta" title="Enlace permanente">&para;</a></h3>
+<p><strong>Postfix</strong> es el MTA más utilizado en entornos Linux modernos debido a su equilibrio entre seguridad, rendimiento y facilidad de configuración.</p>
+<h4 id="archivo-principal-maincf">Archivo Principal: main.cf<a class="headerlink" href="#archivo-principal-maincf" title="Enlace permanente">&para;</a></h4>
+<p>Ubicación: <code>/etc/postfix/main.cf</code></p>
+<p><strong>Parámetros críticos</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a># Identidad del servidor
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>myhostname = mail.ejemplo.com
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>mydomain = ejemplo.com
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>myorigin = $mydomain
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a># Redes de confianza - CRÍTICO PARA SEGURIDAD
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>mynetworks = 127.0.0.0/8 [::1]/128 192.168.1.0/24
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a># Destinos locales
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a># Formato de buzón
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>home_mailbox = Maildir/
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a># Restricciones de recepción (antispam)
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>smtpd_recipient_restrictions =
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    permit_mynetworks,
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    permit_sasl_authenticated,
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    reject_unauth_destination,
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    reject_invalid_hostname,
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    reject_non_fqdn_recipient,
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    reject_unknown_recipient_domain
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a># Tamaño máximo de mensaje (50MB)
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>message_size_limit = 52428800
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a># TLS para conexiones entrantes
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>smtpd_tls_cert_file = /etc/ssl/certs/mail.ejemplo.com.pem
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>smtpd_tls_key_file = /etc/ssl/private/mail.ejemplo.com.key
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>smtpd_use_tls = yes
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>smtpd_tls_security_level = may
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a># TLS para conexiones salientes
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>smtp_tls_security_level = may
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>smtp_tls_loglevel = 1
+</span></code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">Peligro: Open Relay</p>
+<p><strong>NUNCA</strong> configurar <code>mynetworks</code> como <code>0.0.0.0/0</code>. Esto convierte el servidor en un <strong>Open Relay</strong>, permitiendo a spammers enviar correo masivo a través de su infraestructura.</p>
+<p><strong>Incorrecto</strong>:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mynetworks = 0.0.0.0/0  # ¡PELIGRO!
+</span></code></pre></div></p>
+<p><strong>Correcto</strong>:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>mynetworks = 127.0.0.0/8 [::1]/128 192.168.1.0/24
+</span></code></pre></div></p>
+</div>
+<h4 id="comandos-de-gestion-postfix">Comandos de Gestión Postfix<a class="headerlink" href="#comandos-de-gestion-postfix" title="Enlace permanente">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Verificar configuración</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>postconf<span class="w"> </span>-n
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Comprobar fichero de configuración</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>postfix<span class="w"> </span>check
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># Recargar configuración (sin interrumpir servicio)</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>postfix<span class="w"> </span>reload
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># Reiniciar servicio</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>systemctl<span class="w"> </span>restart<span class="w"> </span>postfix
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="c1"># Ver estado del servicio</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>systemctl<span class="w"> </span>status<span class="w"> </span>postfix
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="c1"># Ver cola de correos</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>postqueue<span class="w"> </span>-p
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="c1"># Forzar procesamiento de cola</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>postqueue<span class="w"> </span>-f
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="c1"># Eliminar un correo específico de la cola</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>postsuper<span class="w"> </span>-d<span class="w"> </span>ID_CORREO
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="c1"># Vaciar toda la cola</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>postsuper<span class="w"> </span>-d<span class="w"> </span>ALL
+</span></code></pre></div>
+<hr />
+<h3 id="dovecot-mdaimap">Dovecot (MDA/IMAP)<a class="headerlink" href="#dovecot-mdaimap" title="Enlace permanente">&para;</a></h3>
+<p><strong>Dovecot</strong> es el servidor IMAP/POP3 estándar actual, también funciona como MDA.</p>
+<h4 id="estructura-de-configuracion_1">Estructura de Configuración<a class="headerlink" href="#estructura-de-configuracion_1" title="Enlace permanente">&para;</a></h4>
+<p>Ubicación: <code>/etc/dovecot/dovecot.conf</code> (archivo principal)<br />
+Módulos: <code>/etc/dovecot/conf.d/</code> (configuración modular)</p>
+<p><strong>Archivos clave</strong>:</p>
+<dl>
+<dt>10-mail.conf</dt>
+<dd>Ubicación y formato de buzones</dd>
+</dl>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mail_location = maildir:~/Maildir
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>mail_privileged_group = mail
+</span></code></pre></div>
+<dl>
+<dt>10-auth.conf</dt>
+<dd>Mecanismos de autenticación</dd>
+</dl>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>disable_plaintext_auth = yes
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>auth_mechanisms = plain login
+</span></code></pre></div>
+<dl>
+<dt>10-ssl.conf</dt>
+<dd>Configuración TLS/SSL</dd>
+</dl>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ssl = required
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>ssl_cert = &lt;/etc/ssl/certs/dovecot.pem
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>ssl_key = &lt;/etc/ssl/private/dovecot.key
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>ssl_min_protocol = TLSv1.2
+</span></code></pre></div>
+<dl>
+<dt>10-master.conf</dt>
+<dd>Sockets y servicios</dd>
+</dl>
+<h4 id="comandos-de-gestion-dovecot">Comandos de Gestión Dovecot<a class="headerlink" href="#comandos-de-gestion-dovecot" title="Enlace permanente">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Verificar configuración</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>doveconf<span class="w"> </span>-n
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># Recargar configuración</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>doveadm<span class="w"> </span>reload
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># Ver usuarios conectados</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>doveadm<span class="w"> </span>who
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="c1"># Expurgar mensajes eliminados</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>doveadm<span class="w"> </span>expunge<span class="w"> </span>-u<span class="w"> </span>usuario@ejemplo.com<span class="w"> </span>mailbox<span class="w"> </span>INBOX<span class="w"> </span>all
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="c1"># Ver cuota de usuario</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>doveadm<span class="w"> </span>quota<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>usuario@ejemplo.com
+</span></code></pre></div>
+<hr />
+<h2 id="diagnostico-y-logs">Diagnóstico y Logs<a class="headerlink" href="#diagnostico-y-logs" title="Enlace permanente">&para;</a></h2>
+<h3 id="ubicacion-de-logs">Ubicación de Logs<a class="headerlink" href="#ubicacion-de-logs" title="Enlace permanente">&para;</a></h3>
+<dl>
+<dt>Sistema basado en Debian/Ubuntu</dt>
+<dd><code>/var/log/mail.log</code><br />
+<code>/var/log/mail.err</code></dd>
+<dt>Sistema basado en RedHat/CentOS</dt>
+<dd><code>/var/log/maillog</code></dd>
+<dt>Systemd journal</dt>
+<dd><code>journalctl -u postfix -f</code><br />
+<code>journalctl -u dovecot -f</code></dd>
+</dl>
+<h3 id="codigos-de-estado-smtp">Códigos de Estado SMTP<a class="headerlink" href="#codigos-de-estado-smtp" title="Enlace permanente">&para;</a></h3>
+<p>Al analizar logs, es fundamental interpretar los códigos de respuesta SMTP de tres dígitos:</p>
+<h4 id="tabla-completa-de-codigos">Tabla Completa de Códigos<a class="headerlink" href="#tabla-completa-de-codigos" title="Enlace permanente">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Código</th>
+<th style="text-align: left;">Significado</th>
+<th style="text-align: left;">Descripción</th>
+<th style="text-align: left;">Acción del Emisor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>2xx</strong></td>
+<td style="text-align: left;"><strong>Éxito</strong></td>
+<td style="text-align: left;">Comando aceptado correctamente</td>
+<td style="text-align: left;">Ninguna</td>
+</tr>
+<tr>
+<td style="text-align: center;">220</td>
+<td style="text-align: left;">Service ready</td>
+<td style="text-align: left;">Servidor listo para conexión</td>
+<td style="text-align: left;">Continuar</td>
+</tr>
+<tr>
+<td style="text-align: center;">221</td>
+<td style="text-align: left;">Closing connection</td>
+<td style="text-align: left;">Cierre normal</td>
+<td style="text-align: left;">Terminar</td>
+</tr>
+<tr>
+<td style="text-align: center;">250</td>
+<td style="text-align: left;">OK</td>
+<td style="text-align: left;">Acción completada</td>
+<td style="text-align: left;">Continuar</td>
+</tr>
+<tr>
+<td style="text-align: center;">251</td>
+<td style="text-align: left;">User not local</td>
+<td style="text-align: left;">Usuario no local, reenvío</td>
+<td style="text-align: left;">Aceptar</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>3xx</strong></td>
+<td style="text-align: left;"><strong>Intermedio</strong></td>
+<td style="text-align: left;">Comando aceptado, se necesita más información</td>
+<td style="text-align: left;">Enviar datos</td>
+</tr>
+<tr>
+<td style="text-align: center;">354</td>
+<td style="text-align: left;">Start mail input</td>
+<td style="text-align: left;">Comenzar a enviar datos</td>
+<td style="text-align: left;">Enviar mensaje</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>4xx</strong></td>
+<td style="text-align: left;"><strong>Error Temporal</strong></td>
+<td style="text-align: left;">Fallo transitorio, reintentar más tarde</td>
+<td style="text-align: left;">Encolar y reintentar</td>
+</tr>
+<tr>
+<td style="text-align: center;">421</td>
+<td style="text-align: left;">Service not available</td>
+<td style="text-align: left;">Servicio temporalmente no disponible</td>
+<td style="text-align: left;">Reintentar después</td>
+</tr>
+<tr>
+<td style="text-align: center;">450</td>
+<td style="text-align: left;">Mailbox unavailable</td>
+<td style="text-align: left;">Buzón ocupado temporalmente</td>
+<td style="text-align: left;">Reintentar después</td>
+</tr>
+<tr>
+<td style="text-align: center;">451</td>
+<td style="text-align: left;">Action aborted</td>
+<td style="text-align: left;">Error local en procesamiento</td>
+<td style="text-align: left;">Reintentar después</td>
+</tr>
+<tr>
+<td style="text-align: center;">452</td>
+<td style="text-align: left;">Insufficient storage</td>
+<td style="text-align: left;">Insuficiente espacio en disco</td>
+<td style="text-align: left;">Reintentar después</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>5xx</strong></td>
+<td style="text-align: left;"><strong>Error Permanente</strong></td>
+<td style="text-align: left;">Fallo fatal, no reintentar</td>
+<td style="text-align: left;">Generar bounce</td>
+</tr>
+<tr>
+<td style="text-align: center;">500</td>
+<td style="text-align: left;">Syntax error</td>
+<td style="text-align: left;">Comando no reconocido</td>
+<td style="text-align: left;">Reportar error</td>
+</tr>
+<tr>
+<td style="text-align: center;">501</td>
+<td style="text-align: left;">Syntax error in parameters</td>
+<td style="text-align: left;">Parámetros incorrectos</td>
+<td style="text-align: left;">Reportar error</td>
+</tr>
+<tr>
+<td style="text-align: center;">502</td>
+<td style="text-align: left;">Command not implemented</td>
+<td style="text-align: left;">Comando no implementado</td>
+<td style="text-align: left;">Reportar error</td>
+</tr>
+<tr>
+<td style="text-align: center;">550</td>
+<td style="text-align: left;">Mailbox unavailable</td>
+<td style="text-align: left;">Usuario no encontrado</td>
+<td style="text-align: left;">Bounce al remitente</td>
+</tr>
+<tr>
+<td style="text-align: center;">551</td>
+<td style="text-align: left;">User not local</td>
+<td style="text-align: left;">Usuario no local, sin reenvío</td>
+<td style="text-align: left;">Bounce al remitente</td>
+</tr>
+<tr>
+<td style="text-align: center;">552</td>
+<td style="text-align: left;">Exceeded storage</td>
+<td style="text-align: left;">Cuota de buzón excedida</td>
+<td style="text-align: left;">Bounce al remitente</td>
+</tr>
+<tr>
+<td style="text-align: center;">553</td>
+<td style="text-align: left;">Mailbox name invalid</td>
+<td style="text-align: left;">Nombre de buzón inválido</td>
+<td style="text-align: left;">Bounce al remitente</td>
+</tr>
+<tr>
+<td style="text-align: center;">554</td>
+<td style="text-align: left;">Transaction failed</td>
+<td style="text-align: left;">Transacción fallida</td>
+<td style="text-align: left;">Bounce al remitente</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Clasificación de Códigos</p>
+<ul>
+<li><strong>2xx</strong>: Todo OK, continuar</li>
+<li><strong>3xx</strong>: Esperando más información</li>
+<li><strong>4xx</strong>: Error temporal, <strong>reintentar automáticamente</strong></li>
+<li><strong>5xx</strong>: Error permanente, <strong>NO reintentar</strong>, notificar al remitente</li>
+</ul>
+</div>
+<h3 id="ejemplos-de-analisis-de-logs">Ejemplos de Análisis de Logs<a class="headerlink" href="#ejemplos-de-analisis-de-logs" title="Enlace permanente">&para;</a></h3>
+<h4 id="ejemplo-1-entrega-exitosa">Ejemplo 1: Entrega Exitosa<a class="headerlink" href="#ejemplo-1-entrega-exitosa" title="Enlace permanente">&para;</a></h4>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Feb 06 11:30:15 mail postfix/smtpd[1234]: connect from cliente.ejemplo.com[192.0.2.50]
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>Feb 06 11:30:15 mail postfix/smtpd[1234]: 3A4F51234: client=cliente.ejemplo.com[192.0.2.50]
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>Feb 06 11:30:16 mail postfix/cleanup[1235]: 3A4F51234: message-id=&lt;20260206103015.3A4F51234@mail.ejemplo.com&gt;
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>Feb 06 11:30:16 mail postfix/qmgr[1020]: 3A4F51234: from=&lt;usuario@origen.com&gt;, size=1234, nrcpt=1
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>Feb 06 11:30:16 mail postfix/smtp[1236]: 3A4F51234: to=&lt;destino@ejemplo.com&gt;, relay=mail.destino.com[198.51.100.50]:25, status=sent (250 OK)
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>Feb 06 11:30:16 mail postfix/qmgr[1020]: 3A4F51234: removed
+</span></code></pre></div>
+<p><strong>Interpretación</strong>: Correo recibido de <code>usuario@origen.com</code>, procesado y entregado exitosamente a <code>destino@ejemplo.com</code>. Código 250 indica éxito.</p>
+<h4 id="ejemplo-2-usuario-no-encontrado-5xx">Ejemplo 2: Usuario No Encontrado (5xx)<a class="headerlink" href="#ejemplo-2-usuario-no-encontrado-5xx" title="Enlace permanente">&para;</a></h4>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Feb 06 11:35:20 mail postfix/smtp[1240]: 4B5G62345: to=&lt;noexiste@ejemplo.com&gt;, relay=mail.ejemplo.com[192.0.2.10]:25, status=bounced (550 5.1.1 User unknown)
+</span></code></pre></div>
+<p><strong>Interpretación</strong>: Error <strong>permanente</strong> 550 - el usuario no existe. El correo será devuelto al remitente (bounce).</p>
+<h4 id="ejemplo-3-disco-lleno-4xx">Ejemplo 3: Disco Lleno (4xx)<a class="headerlink" href="#ejemplo-3-disco-lleno-4xx" title="Enlace permanente">&para;</a></h4>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Feb 06 12:00:30 mail postfix/smtp[1250]: 5C6H73456: to=&lt;usuario@ejemplo.com&gt;, relay=mail.ejemplo.com[192.0.2.10]:25, status=deferred (452 4.2.2 Mailbox full)
+</span></code></pre></div>
+<p><strong>Interpretación</strong>: Error <strong>temporal</strong> 452 - buzón lleno. Postfix reintentará automáticamente (deferred).</p>
+<hr />
+<h2 id="flujo-de-troubleshooting">Flujo de Troubleshooting<a class="headerlink" href="#flujo-de-troubleshooting" title="Enlace permanente">&para;</a></h2>
+<pre class="mermaid"><code>flowchart TD
+    A[Problema reportado] --&gt; B{¿El servicio&lt;br/&gt;está activo?}
+    B --&gt;|No| C[systemctl start postfix/dovecot]
+    B --&gt;|Sí| D{¿Llegó al&lt;br/&gt;servidor?}
+    D --&gt;|No|E[Verificar DNS MX]
+    E --&gt; F[Verificar firewall]
+    F --&gt; G[Verificar conectividad de red]
+    D --&gt;|Sí| H{¿En logs&lt;br/&gt;hay errores?}
+    H --&gt;|5xx| I[Usuario no existe&lt;br/&gt;o rechazado por filtros]
+    H --&gt;|4xx| J[Problema temporal&lt;br/&gt;disco/cuota/carga]
+    H --&gt;|Sin errores| K[Verificar filtros&lt;br/&gt;spam del cliente]
+    I --&gt; L[Corregir configuración]
+    J --&gt; M[Resolver recurso]
+    K --&gt; N[Ajustar filtros]
+
+    style C fill:#26a69a,stroke:#00695c,color:#fff
+    style L fill:#ffa726,stroke:#f57c00,color:#fff
+    style M fill:#ffa726,stroke:#f57c00,color:#fff
+    style N fill:#5c6bc0,stroke:#3949ab,color:#fff</code></pre>
+<hr />
+<h2 id="comandos-esenciales-de-diagnostico">Comandos Esenciales de Diagnóstico<a class="headerlink" href="#comandos-esenciales-de-diagnostico" title="Enlace permanente">&para;</a></h2>
+<h3 id="verificacion-de-conectividad">Verificación de Conectividad<a class="headerlink" href="#verificacion-de-conectividad" title="Enlace permanente">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Probar conexión SM TP</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>telnet<span class="w"> </span>mail.ejemplo.com<span class="w"> </span><span class="m">25</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># Probar SMTP con STARTTLS</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>mail.ejemplo.com:587<span class="w"> </span>-starttls<span class="w"> </span>smtp
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="c1"># Probar IMAP</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>telnet<span class="w"> </span>mail.ejemplo.com<span class="w"> </span><span class="m">143</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="c1"># Probar IMAPS (TLS)</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>mail.ejemplo.com:993
+</span></code></pre></div>
+<h3 id="analisis-de-logs-en-tiempo-real">Análisis de Logs en Tiempo Real<a class="headerlink" href="#analisis-de-logs-en-tiempo-real" title="Enlace permanente">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Seguir log de correo</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/mail.log
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># Filtrar solo errores</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>grep<span class="w"> </span>-i<span class="w"> </span>error<span class="w"> </span>/var/log/mail.log
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="c1"># Buscar correo específico por ID</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>grep<span class="w"> </span><span class="s2">&quot;3A4F51234&quot;</span><span class="w"> </span>/var/log/mail.log
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="c1"># Filtrar por remitente</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>grep<span class="w"> </span><span class="s2">&quot;from=&lt;usuario@ejemplo.com&gt;&quot;</span><span class="w"> </span>/var/log/mail.log
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="c1"># Ver intentos de conexión rechazados</span>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>grep<span class="w"> </span><span class="s2">&quot;reject&quot;</span><span class="w"> </span>/var/log/mail.log
+</span></code></pre></div>
+<h3 id="verificacion-de-servicios">Verificación de Servicios<a class="headerlink" href="#verificacion-de-servicios" title="Enlace permanente">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Ver puertos en escucha</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>netstat<span class="w"> </span>-tulpn<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;25|587|143|993&quot;</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="c1"># o con ss (más moderno)</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>ss<span class="w"> </span>-tulpn<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;25|587|143|993&quot;</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="c1"># Verificar procesos</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>postfix
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>dovecot
+</span></code></pre></div>
+<hr />
+<h2 id="mejores-practicas-de-administracion">Mejores Prácticas de Administración<a class="headerlink" href="#mejores-practicas-de-administracion" title="Enlace permanente">&para;</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Recomendaciones</p>
+<p><strong>Monitoreo</strong>:</p>
+<ul>
+<li>Implementar alertas para cola de correo grande (<code>postqueue -p</code>)</li>
+<li>Monitorear espacio en disco (buzones pueden crecer rápidamente)</li>
+<li>Configurar logrotate para logs de correo</li>
+</ul>
+<p><strong>Seguridad</strong>:</p>
+<ul>
+<li>Revisar periódicamente <code>mynetworks</code> en Postfix</li>
+<li>Mantener actualizado el software (Postfix, Dovecot)</li>
+<li>Analizar logs en busca de intentos de relay no autorizado</li>
+<li>Implementar fail2ban para bloquear IPs con intentos de login fallidos</li>
+</ul>
+<p><strong>Mantenimiento</strong>:</p>
+<ul>
+<li>Backup regular de buzones de usuario</li>
+<li>Limpieza periódica de mensajes en cuarentena</li>
+<li>Rotación de logs</li>
+<li>Actualización de certificados TLS antes de expiración</li>
+</ul>
+</div>
+<hr />
+<h2 id="proximos-pasos">Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Enlace permanente">&para;</a></h2>
+<p>Para completar su conocimiento:</p>
+<ul>
+<li>Revise <strong><a href="../seguridad/">Seguridad</a></strong> para configurar SPF, DKIM y DMARC</li>
+<li>Practique en un entorno de laboratorio antes de aplicar cambios en producción</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 - Material Didáctico Avanzado
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="mailto:contacto@example.com" target="_blank" rel="noopener" title="Contacto por correo" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4l208 156a48 48 0 0 0 57.6 0l208-156c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48zM0 196v188c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V196L313.6 344.8c-34.1 25.6-81.1 25.6-115.2 0z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "toc.follow", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
