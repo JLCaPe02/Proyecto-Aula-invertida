@@ -16,7 +16,7 @@ Material didáctico completo para la implementación de metodología de aula inv
 Este proyecto incluye:
 
 - **📚 Documentación MkDocs**: Sitio web completo con 6 módulos temáticos, 18 diagramas Mermaid y contenido técnico profesional
-- **🎮 Kahoot**: 40 preguntas de gamificación para evaluación formativa
+- **🎮 Kahoot**: 50 preguntas de gamificación para evaluación formativa
 - **📊 Presentación PowerPoint**: Material de apoyo para la sesión presencial
 - **📝 Examen Test**: 30 preguntas para evaluación sumativa
 - **💻 Actividades Prácticas**: 2 actividades hands-on para realizar en el aula
@@ -40,8 +40,8 @@ Este material está diseñado para aplicar la metodología de aula invertida sig
    - Estudiar los diagramas Mermaid para comprender flujos y arquitecturas
    - Tomar notas sobre conceptos que no comprenden
 
-2. **Completar el Kahoot** (15-20 minutos):
-   - Realizar el cuestionario de 40 preguntas como autoevaluación
+2. **Completar el Kahoot** (20-35 minutos):
+   - Realizar el cuestionario de 50 preguntas como autoevaluación
    - Identificar áreas que requieren refuerzo
    - Anotar dudas para resolver en clase
 
@@ -55,7 +55,7 @@ Este material está diseñado para aplicar la metodología de aula invertida sig
 **Recursos necesarios**:
 
 - Acceso a la documentación MkDocs (online o archivo HTML estático)
-- Kahoot configurado con las 40 preguntas
+- Kahoot configurado con las 50 preguntas
 - Plataforma LMS (Moodle, Classroom, etc.) para comunicación
 
 ---
@@ -182,15 +182,9 @@ Configurar un servidor de correo funcional en entorno virtualizado.
 **Modalidad**: Individual o parejas  
 **Evaluación**: Formativa (15% de la nota)
 
-##### **6. Kahoot en Vivo - Repaso** (10-15 minutos)
+---
 
-Repetir el Kahoot (o versión reducida de 20 preguntas) de forma competitiva en clase para:
-
-- Reforzar conceptos vistos en las prácticas
-- Generar engagement con gamificación
-- Identificar dudas finales
-
-##### **7. Cierre y Síntesis** (10-15 minutos)
+##### **6. Cierre y Síntesis** (10-15 minutos)
 
 - Resumen de conceptos clave aprendidos
 - Responder últimas dudas
@@ -686,17 +680,7 @@ mkdocs gh-deploy  # Publica en GitHub Pages
 - [Mail-Tester](https://www.mail-tester.com/)
 - [DMARC Analyzer](https://www.dmarcanalyzer.com/)
 
-### **Para el Alumnado**
-
-- Documentación MkDocs (este proyecto)
-- Tutoriales de DigitalOcean: "How To Install and Configure Postfix"
-- Videos recomendados: NetworkChuck canal de YouTube (Mail Server series)
-
 ---
-
-## Licencia
-
-Este material didáctico se distribuye bajo licencia **Creative Commons BY-NC-SA 4.0**.
 
 Permite:
 
@@ -714,36 +698,6 @@ Permite:
 Año: 2026  
 Centro: Técnico Superior en Administración de Sistemas Informáticos en Red
 
----
-
-## Instrucciones de Uso del Proyecto MkDocs
-
-### **Visualizar la documentación localmente**:
-
-```bash
-cd material_aula_invertida
-mkdocs serve
-```
-
-Abrir navegador en: `http://127.0.0.1:8000`
-
-### **Generar HTML estático**:
-
-```bash
-mkdocs build --clean
-```
-
-Los archivos se generan en `material_aula_invertida/site/`
-
-### **Publicar en GitHub Pages**:
-
-```bash
-mkdocs gh-deploy
-```
-
----
-
-## Contacto y Soporte
 
 Para dudas o sugerencias sobre este material, contactar a los autores a través del repositorio del proyecto.
 
