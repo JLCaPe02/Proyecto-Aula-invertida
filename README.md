@@ -1,4 +1,4 @@
-# Material Aula Invertida - Administración de Servicios de Correo Electrónico
+# Guía del profesor - Instalación y Administración de Servicios de Correo electrónico
 
 ## Descripción
 
