@@ -1,0 +1,1478 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación teórica profesional sobre la administración de sistemas de correo electrónico en entornos Linux">
+      
+      
+        <meta name="author" content="Teodoro Sibón Jiménez y José Luis Cabello Pérez">
+      
+      
+      
+        <link rel="prev" href="../administracion/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Seguridad y Autenticación - Administración de Servicios de Correo Electrónico</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#seguridad-y-autenticacion-en-correo-electronico" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Administración de Servicios de Correo Electrónico" class="md-header__button md-logo" aria-label="Administración de Servicios de Correo Electrónico" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Administración de Servicios de Correo Electrónico
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Seguridad y Autenticación
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartir" aria-label="Compartir" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href=".." class="md-tabs__link">
+          
+  
+  
+    
+  
+  Inicio
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../arquitectura/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Arquitectura y Protocolos
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../dns_infraestructura/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Infraestructura
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Seguridad
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Administración de Servicios de Correo Electrónico" class="md-nav__button md-logo" aria-label="Administración de Servicios de Correo Electrónico" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Administración de Servicios de Correo Electrónico
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href=".." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Inicio
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../conceptos_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conceptos Básicos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura y Protocolos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitectura y Protocolos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arquitectura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura del Sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protocolos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protocolos de Comunicación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infraestructura
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Infraestructura
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dns_infraestructura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DNS y Correo Electrónico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administración y Diagnóstico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seguridad
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Seguridad
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seguridad y Autenticación
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seguridad y Autenticación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cifrado-en-transito-tlsssl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cifrado en Tránsito (TLS/SSL)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cifrado en Tránsito (TLS/SSL)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problema-interceptacion-de-mensajes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema: Interceptación de Mensajes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solucion-transport-layer-security-tls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solución: Transport Layer Security (TLS)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mecanismos-de-autenticacion-de-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mecanismos de Autenticación de Dominio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mecanismos de Autenticación de Dominio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spf-sender-policy-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SPF (Sender Policy Framework)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dkim-domainkeys-identified-mail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DKIM (DomainKeys Identified Mail)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dmarc-domain-based-message-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DMARC (Domain-based Message Authentication)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabla-comparativa-de-mecanismos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabla Comparativa de Mecanismos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recomendaciones-de-implementacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recomendaciones de Implementación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#herramientas-de-verificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Herramientas de Verificación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximos-pasos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Próximos Pasos
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="seguridad-y-autenticacion-en-correo-electronico">Seguridad y Autenticación en Correo Electrónico<a class="headerlink" href="#seguridad-y-autenticacion-en-correo-electronico" title="Enlace permanente">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Enlace permanente">&para;</a></h2>
+<p>El protocolo original de correo electrónico (<strong>SMTP</strong>) no fue diseñado con seguridad en mente. En los años 80, Internet era una red académica de  confianza mutua. Para combatir el <strong>spam</strong>, el <strong>phishing</strong> y la <strong>suplantación de identidad (spoofing)</strong>, se han desarrollado múltiples capas adicionales de seguridad que actualmente son imprescindibles en cualquier despliegue profesional.</p>
+<pre class="mermaid"><code>flowchart TD
+    A[Correo enviado] --&gt; B{Cifrado TLS}
+    B --&gt;|No| X[Rechazo recomendado]
+    B --&gt;|Sí| C{Validación SPF}
+    C --&gt;|Falla| D[Marcar como spam]
+    C --&gt;|Pasa| E{Validación DKIM}
+    E --&gt;|Falla| D
+    E --&gt;|Pasa| F{Política DMARC}
+    F --&gt;|Pasa todas| G[Correo aceptado]
+    F --&gt;|Falla| H{Acción DMARC}
+    H --&gt;|none| I[Aceptar pero reportar]
+    H --&gt;|quarantine| J[Enviar a spam]
+    H --&gt;|reject| K[Rechazar completamente]
+
+    style X fill:#ef5350,stroke:#c62828,color:#fff
+    style D fill:#ffa726,stroke:#f57c00,color:#fff
+    style G fill:#26a69a,stroke:#00695c,color:#fff
+    style J fill:#ffa726,stroke:#f57c00,color:#fff
+    style K fill:#ef5350,stroke:#c62828,color:#fff</code></pre>
+<hr />
+<h2 id="cifrado-en-transito-tlsssl">Cifrado en Tránsito (TLS/SSL)<a class="headerlink" href="#cifrado-en-transito-tlsssl" title="Enlace permanente">&para;</a></h2>
+<h3 id="problema-interceptacion-de-mensajes">Problema: Interceptación de Mensajes<a class="headerlink" href="#problema-interceptacion-de-mensajes" title="Enlace permanente">&para;</a></h3>
+<p>Por defecto, SMTP transmite <strong>todo en texto plano</strong>: credenciales de autenticación, contenido de mensajes, direcciones. Esto lo hace vulnerable a <strong>ataques Man-in-the-Middle (MITM)</strong> donde un atacante intercepta y lee la comunicación.</p>
+<h3 id="solucion-transport-layer-security-tls">Solución: Transport Layer Security (TLS)<a class="headerlink" href="#solucion-transport-layer-security-tls" title="Enlace permanente">&para;</a></h3>
+<p><strong>TLS</strong> (Transport Layer Security) cifra la conexión entre cliente y servidor, protegiendo contra la interceptación.</p>
+<h4 id="modos-de-implementacion-tls">Modos de Implementación TLS<a class="headerlink" href="#modos-de-implementacion-tls" title="Enlace permanente">&para;</a></h4>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">STARTTLS (Oportunista)</label><label for="__tabbed_1_2">TLS Implícito (Wrapper)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><strong>Descripción</strong>: Permite <strong>elevar</strong> una conexión inicialmente insegura a una cifrada mediante el comando <code>STARTTLS</code>.</p>
+<p><strong>Funcionamiento</strong>:</p>
+<ol>
+<li>Cliente conecta al puerto estándar (25, 587, 143)</li>
+<li>Servidor anuncia capacidad STARTTLS</li>
+<li>Cliente solicita <code>STARTTLS</code></li>
+<li>Se realiza negociación TLS</li>
+<li>La conexión continúa ahora cifrada</li>
+</ol>
+<p><strong>Ventajas</strong>:</p>
+<ul>
+<li>Compatibilidad con clientes antiguos que no soportan TLS</li>
+<li>Usa los puertos estándar</li>
+</ul>
+<p><strong>Desventajas</strong>:</p>
+<ul>
+<li>Vulnerable a ataques de degradación (strip STARTTLS)</li>
+<li>Requiere configuración explícita para <strong>forzar</strong> TLS</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<p><strong>Descripción</strong>: La conexión nace <strong>cifrada desde el primer byte</strong>. No hay fase de texto plano.</p>
+<p><strong>Puertos dedicados</strong>:</p>
+<ul>
+<li><strong>465</strong>: SMTP sobre TLS (SMTPS)</li>
+<li><strong>993</strong>: IMAP sobre TLS (IMAPS)</li>
+<li><strong>995</strong>: POP3 sobre TLS (POP3S)</li>
+</ul>
+<p><strong>Ventajas</strong>:</p>
+<ul>
+<li>Protección completa desde el inicio</li>
+<li>No vulnerable a ataques de degradación</li>
+<li>Más simple de configurar en cliente</li>
+</ul>
+<p><strong>Desventajas</strong>:</p>
+<ul>
+<li>Requiere puerto dedicado</li>
+<li>Menor compatibilidad con sistemas legacy</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Recomendación de Seguridad</p>
+<p>En entornos de producción modernos:</p>
+<ol>
+<li><strong>Deshabilitar completamente</strong> la autenticación sin TLS</li>
+<li>Usar puertos con <strong>TLS implícito</strong> (465, 993, 995) cuando sea posible</li>
+<li>Si se usa STARTTLS, <strong>forzar</strong> su uso mediante restricciones en el servidor</li>
+<li>Configurar certificados SSL/TLS válidos (Let's Encrypt, DigiCert, etc.)</li>
+</ol>
+</div>
+<hr />
+<h2 id="mecanismos-de-autenticacion-de-dominio">Mecanismos de Autenticación de Dominio<a class="headerlink" href="#mecanismos-de-autenticacion-de-dominio" title="Enlace permanente">&para;</a></h2>
+<p>Los tres mecanismos siguientes trabajan juntos para validar que un correo proviene realmente del dominio que afirma ser.</p>
+<h3 id="spf-sender-policy-framework">SPF (Sender Policy Framework)<a class="headerlink" href="#spf-sender-policy-framework" title="Enlace permanente">&para;</a></h3>
+<p><strong>Definición</strong>: Mecanismo basado en <strong>DNS</strong> que certifica qué servidores están <strong>autorizados</strong> a enviar correo en nombre de un dominio.</p>
+<p><strong>RFC de referencia</strong>: <a href="https://www.rfc-editor.org/rfc/rfc7208.html">RFC 7208</a></p>
+<h4 id="funcionamiento">Funcionamiento<a class="headerlink" href="#funcionamiento" title="Enlace permanente">&para;</a></h4>
+<pre class="mermaid"><code>sequenceDiagram
+    participant MTA as MTA Receptor
+    participant DNS as Servidor DNS
+    participant Spammer as Posible Spammer
+
+    Spammer-&gt;&gt;MTA: MAIL FROM:&lt;fake@ejemplo.com&gt;&lt;br/&gt;IP: 203.0.113.50
+    MTA-&gt;&gt;DNS: ¿Cuál es el SPF de ejemplo.com?
+    DNS--&gt;&gt;MTA: v=spf1 ip4:192.0.2.0/24 mx -all
+    Note over MTA: La IP 203.0.113.50&lt;br/&gt;NO está autorizada
+    MTA--&gt;&gt;Spammer: 550 SPF check failed</code></pre>
+<h4 id="formato-del-registro-spf">Formato del Registro SPF<a class="headerlink" href="#formato-del-registro-spf" title="Enlace permanente">&para;</a></h4>
+<p>El registro SPF se publica como registro <strong>TXT</strong> en DNS:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ejemplo.com.  IN  TXT  &quot;v=spf1 ip4:192.0.2.10 include:_spf.google.com mx -all&quot;
+</span></code></pre></div>
+<p><strong>Componentes</strong>:</p>
+<dl>
+<dt>v=spf1</dt>
+<dd>Versión del protocolo SPF</dd>
+<dt>ip4:192.0.2.10</dt>
+<dd>Autoriza una IP específica (también puede ser <code>ip6:</code> para IPv6)</dd>
+<dt>include:_spf.google.com</dt>
+<dd>Incluye las IPs autorizadas de otro dominio (útil para proveedores externos como Google Workspace)</dd>
+<dt>mx</dt>
+<dd>Autoriza las IPs de los servidores listados en registros MX</dd>
+<dt>-all</dt>
+<dd>Política estricta: <strong>rechazar</strong> cualquier IP no listada</dd>
+</dl>
+<p><strong>Calificadores</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Calificador</th>
+<th style="text-align: left;">Significado</th>
+<th style="text-align: left;">Acción recomendada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>+</code> (pass)</td>
+<td style="text-align: left;">Autorizado explícitamente</td>
+<td style="text-align: left;">Aceptar</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>-</code> (fail)</td>
+<td style="text-align: left;">NO autorizado - política dura</td>
+<td style="text-align: left;">Rechazar</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>~</code> (softfail)</td>
+<td style="text-align: left;">NO autorizado - política suave</td>
+<td style="text-align: left;">Marcar como spam</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>?</code> (neutral)</td>
+<td style="text-align: left;">Sin política definida</td>
+<td style="text-align: left;">Ninguna acción</td>
+</tr>
+</tbody>
+</table>
+<h4 id="ejemplo-de-validacion-spf">Ejemplo de Validación SPF<a class="headerlink" href="#ejemplo-de-validacion-spf" title="Enlace permanente">&para;</a></h4>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a># Empresa con servidor propio y uso de Google Workspace
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>ejemplo.com. IN TXT &quot;v=spf1 mx ip4:192.0.2.10 include:_spf.google.com -all&quot;
+</span></code></pre></div>
+<p><strong>Interpretación</strong>: Están autorizados a enviar correo como <code>@ejemplo.com</code>:
+- Los servidores listados en los registros MX
+- La IP <code>192.0.2.10</code>
+- Los servidores autorizados por Google (para cuentas Google Workspace)
+- Cualquier otra IP será <strong>rechazada</strong> (-all)</p>
+<hr />
+<h3 id="dkim-domainkeys-identified-mail">DKIM (DomainKeys Identified Mail)<a class="headerlink" href="#dkim-domainkeys-identified-mail" title="Enlace permanente">&para;</a></h3>
+<p><strong>Definición</strong>: Sistema de <strong>firma digital</strong> que garantiza la <strong>integridad</strong> del mensaje y la autenticidad del dominio emisor.</p>
+<p><strong>RFC de referencia</strong>: <a href="https://www.rfc-editor.org/rfc/rfc6376.html">RFC 6376</a></p>
+<h4 id="funcionamiento_1">Funcionamiento<a class="headerlink" href="#funcionamiento_1" title="Enlace permanente">&para;</a></h4>
+<pre class="mermaid"><code>sequenceDiagram
+    participant MTA_O as MTA Origen
+    participant Mensaje as Mensaje
+    participant DNS as DNS Público
+    participant MTA_D as MTA Destino
+
+    Note over MTA_O: Firma el mensaje&lt;br/&gt;con clave privada
+    MTA_O-&gt;&gt;Mensaje: Añade cabecera DKIM-Signature
+    Mensaje-&gt;&gt;MTA_D: Mensaje con firma
+    MTA_D-&gt;&gt;DNS: Consulta clave pública&lt;br/&gt;selector._domainkey.ejemplo.com
+    DNS--&gt;&gt;MTA_D: Devuelve clave pública
+    Note over MTA_D: Verifica firma con&lt;br/&gt;clave pública
+    MTA_D-&gt;&gt;MTA_D: Compara hashes
+    alt Firma válida
+        MTA_D--&gt;&gt;MTA_D: DKIM PASS
+    else Firma inválida
+        MTA_D--&gt;&gt;MTA_D: DKIM FAIL - Contenido alterado
+    end</code></pre>
+<h4 id="componentes-dkim">Componentes DKIM<a class="headerlink" href="#componentes-dkim" title="Enlace permanente">&para;</a></h4>
+<dl>
+<dt><strong>Clave privada</strong> (en el servidor de origen)</dt>
+<dd>Se almacena de forma segura en el servidor MTA. Se usa para firmar los mensajes salientes.</dd>
+<dt><strong>Clave pública</strong> (en DNS)</dt>
+<dd>Se publica como registro TXT con formato especial: <code>selector._domainkey.dominio.com</code></dd>
+<dt><strong>Cabecera DKIM-Signature</strong></dt>
+<dd>Añadida automáticamente al mensaje. Contiene la firma criptográfica.</dd>
+</dl>
+<h4 id="ejemplo-de-registro-dkim-en-dns">Ejemplo de Registro DKIM en DNS<a class="headerlink" href="#ejemplo-de-registro-dkim-en-dns" title="Enlace permanente">&para;</a></h4>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>selector1._domainkey.ejemplo.com. IN TXT (
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    &quot;v=DKIM1; k=rsa; &quot;
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    &quot;p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDwIRP/UC3SBsEmGqZ9ZJW3/DkMoGeLnQg1fWn7/zYtIxN2SnFCjxOCKG9v3b4jYfcTNh5ijSsq631uBItLa7od+v/RtdC2UzJ1lWT947qR+Rce9VCOlr9lDBTNDLYE3IAVBdYwHTsqLz8KqtD8iAZH7sY2OiO7Mm0XHW3z9CkzxQIDAQAB&quot;
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>)
+</span></code></pre></div>
+<p><strong>Campos</strong>:
+- <code>v=DKIM1</code>: Versión de DKIM
+- <code>k=rsa</code>: Tipo de clave (RSA)
+- <code>p=...</code>: Clave pública en formato Base64</p>
+<div class="admonition tip">
+<p class="admonition-title">Generación de Claves DKIM</p>
+<p>La mayoría de MTA modernos (Postfix + OpenDKIM, etc.) incluyen herramiento para generar pares de claves:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>opendkim-genkey<span class="w"> </span>-s<span class="w"> </span>selector1<span class="w"> </span>-d<span class="w"> </span>ejemplo.com
+</span></code></pre></div>
+</div>
+<hr />
+<h3 id="dmarc-domain-based-message-authentication">DMARC (Domain-based Message Authentication)<a class="headerlink" href="#dmarc-domain-based-message-authentication" title="Enlace permanente">&para;</a></h3>
+<p><strong>Definición</strong>: Política que <strong>unifica SPF y DKIM</strong> y especifica qué debe hacer el receptor si fallan las validaciones.</p>
+<p><strong>RFC de referencia</strong>: <a href="https://www.rfc-editor.org/rfc/rfc7489.html">RFC 7489</a></p>
+<h4 id="proposito-de-dmarc">Propósito de DMARC<a class="headerlink" href="#proposito-de-dmarc" title="Enlace permanente">&para;</a></h4>
+<p>DMARC responde a las preguntas:</p>
+<ol>
+<li>¿Qué hacer si un correo falla SPF o DKIM?</li>
+<li>¿Cómo informar al propietario del dominio sobre intentos de suplantación?</li>
+</ol>
+<h4 id="registro-dmarc-en-dns">Registro DMARC en DNS<a class="headerlink" href="#registro-dmarc-en-dns" title="Enlace permanente">&para;</a></h4>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>_dmarc.ejemplo.com. IN TXT &quot;v=DMARC1; p=reject; rua=mailto:dmarc@ejemplo.com; ruf=mailto:forensic@ejemplo.com; pct=100&quot;
+</span></code></pre></div>
+<p><strong>Parámetros principales</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parámetro</th>
+<th style="text-align: left;">Valores posibles</th>
+<th style="text-align: left;">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>v</code></td>
+<td style="text-align: left;">DMARC1</td>
+<td style="text-align: left;">Versión del protocolo</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>p</code></td>
+<td style="text-align: left;">none, quarantine, reject</td>
+<td style="text-align: left;">Política para correos que fallan</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>sp</code></td>
+<td style="text-align: left;">none, quarantine, reject</td>
+<td style="text-align: left;">Política para subdominios</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>rua</code></td>
+<td style="text-align: left;">dirección email</td>
+<td style="text-align: left;">Dirección para reportes agregados</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>ruf</code></td>
+<td style="text-align: left;">dirección email</td>
+<td style="text-align: left;">Dirección para reportes forenses (detallados)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>pct</code></td>
+<td style="text-align: left;">0-100</td>
+<td style="text-align: left;">Porcentaje de mensajes a los que aplicar la política</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>adkim</code></td>
+<td style="text-align: left;">r (relaxed), s (strict)</td>
+<td style="text-align: left;">Alineación DKIM</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>aspf</code></td>
+<td style="text-align: left;">r (relaxed), s (strict)</td>
+<td style="text-align: left;">Alineación SPF</td>
+</tr>
+</tbody>
+</table>
+<h4 id="politicas-dmarc">Políticas DMARC<a class="headerlink" href="#politicas-dmarc" title="Enlace permanente">&para;</a></h4>
+<dl>
+<dt>none</dt>
+<dd><strong>Modo de monitoreo</strong>. No aplicar ninguna acción, solo enviar reportes. Útil para fase de prueba.</dd>
+<dt>quarantine</dt>
+<dd><strong>Cuarentena</strong>. Enviar a carpeta de spam/cuarentena.</dd>
+<dt>reject</dt>
+<dd><strong>Rechazo total</strong>. El servidor debe rechazar el mensaje directamente.</dd>
+</dl>
+<h4 id="ejemplo-de-implementacion-progresiva">Ejemplo de Implementación Progresiva<a class="headerlink" href="#ejemplo-de-implementacion-progresiva" title="Enlace permanente">&para;</a></h4>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a># Fase 1: Monitoreo (2-4 semanas)
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>_dmarc.ejemplo.com. IN TXT &quot;v=DMARC1; p=none; rua=mailto:dmarc@ejemplo.com&quot;
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a># Fase 2: Cuarentena parcial
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>_dmarc.ejemplo.com. IN TXT &quot;v=DMARC1; p=quarantine; pct=25; rua=mailto:dmarc@ejemplo.com&quot;
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a># Fase 3: Política estricta
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>_dmarc.ejemplo.com. IN TXT &quot;v=DMARC1; p=reject; rua=mailto:dmarc@ejemplo.com; ruf=mailto:forensic@ejemplo.com&quot;
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Cuidado con Políticas Estrictas</p>
+<p>Antes de configurar <code>p=reject</code>, asegurarse de que:</p>
+<ul>
+<li>SPF está configurado correctamente</li>
+<li>DKIM funciona para todos los flujos de correo</li>
+<li>Se han analizado los reportes DMARC durante al menos 2 semanas</li>
+<li>Se han identificado y autorizado todos los servidores legítimos</li>
+</ul>
+</div>
+<hr />
+<h2 id="tabla-comparativa-de-mecanismos">Tabla Comparativa de Mecanismos<a class="headerlink" href="#tabla-comparativa-de-mecanismos" title="Enlace permanente">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Mecanismo</th>
+<th style="text-align: left;">Valida</th>
+<th style="text-align: left;">Basado en</th>
+<th style="text-align: left;">Previene</th>
+<th style="text-align: left;">Reportes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>SPF</strong></td>
+<td style="text-align: left;">IP de origen</td>
+<td style="text-align: left;">DNS (TXT)</td>
+<td style="text-align: left;">Suplantación de dominio</td>
+<td style="text-align: left;">No nativamente</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>DKIM</strong></td>
+<td style="text-align: left;">Integridad del mensaje</td>
+<td style="text-align: left;">Criptografía + DNS</td>
+<td style="text-align: left;">Alteración de contenido</td>
+<td style="text-align: left;">No nativamente</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>DMARC</strong></td>
+<td style="text-align: left;">SPF + DKIM</td>
+<td style="text-align: left;">DNS (TXT)</td>
+<td style="text-align: left;">Uso no autorizado del dominio</td>
+<td style="text-align: left;">Sí (rua/ruf)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TLS</strong></td>
+<td style="text-align: left;">Cifrado de tránsito</td>
+<td style="text-align: left;">Certificados SSL</td>
+<td style="text-align: left;">Interceptación MITM</td>
+<td style="text-align: left;">No</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="recomendaciones-de-implementacion">Recomendaciones de Implementación<a class="headerlink" href="#recomendaciones-de-implementacion" title="Enlace permanente">&para;</a></h2>
+<div class="admonition success">
+<p class="admonition-title">Lista de Verificación de Seguridad</p>
+<p><strong>Nivel Básico</strong> (mínimo recomendado):</p>
+<ul>
+<li>[x] Configurar certificado SSL/TLS válido</li>
+<li>[x] Habilitar STARTTLS en todos los puertos</li>
+<li>[x] Deshabilitar autenticación sin cifrado</li>
+<li>[x] Configurar registro SPF básico</li>
+</ul>
+<p><strong>Nivel Intermedio</strong>:</p>
+<ul>
+<li>[x] Implementar DKIM con claves de 2048 bits</li>
+<li>[x] Configurar DMARC en modo <code>p=none</code></li>
+<li>[x] Analizar reportes DMARC durante 2-4 semanas</li>
+<li>[x] Configurar PTR (reverse DNS)</li>
+</ul>
+<p><strong>Nivel Avanzado</strong>:</p>
+<ul>
+<li>[x] DMARC en modo <code>p=reject</code></li>
+<li>[x] TLS implícito en puertos dedicados</li>
+<li>[x] Rotación periódica de claves DKIM</li>
+<li>[x] Monitoreo automatizado de reportes DMARC</li>
+<li>[x] MTA-STS (SMTP MTA Strict Transport Security)</li>
+</ul>
+</div>
+<hr />
+<h2 id="herramientas-de-verificacion">Herramientas de Verificación<a class="headerlink" href="#herramientas-de-verificacion" title="Enlace permanente">&para;</a></h2>
+<p><strong>Validación de configuración</strong>:</p>
+<ul>
+<li><a href="https://mxtoolbox.com/">MXToolbox</a> - Suite completa de herramientas DNS y correo</li>
+<li><a href="https://www.dmarcanalyzer.com/">DMARC Analyzer</a> - Análisis de reportes DMARC</li>
+<li><a href="https://www.mail-tester.com/">Mail-Tester</a> - Prueba integral de correo saliente</li>
+</ul>
+<p><strong>Comandos de diagnóstico</strong>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Verificar registro SPF</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>dig<span class="w"> </span>ejemplo.com<span class="w"> </span>TXT<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>spf
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># Verificar DKIM</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>dig<span class="w"> </span>selector._domainkey.ejemplo.com<span class="w"> </span>TXT
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># Verificar DMARC</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>dig<span class="w"> </span>_dmarc.ejemplo.com<span class="w"> </span>TXT
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="c1"># Probar conexión TLS</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>mail.ejemplo.com:587<span class="w"> </span>-starttls<span class="w"> </span>smtp
+</span></code></pre></div>
+<hr />
+<h2 id="proximos-pasos">Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Enlace permanente">&para;</a></h2>
+<p>Con los mecanismos de seguridad comprendidos:</p>
+<ul>
+<li>Revise <strong><a href="../administracion/">Administración</a></strong> para configurar estos mecanismos en Postfix y Dovecot</li>
+<li>Vuelva a <strong><a href="../dns_infraestructura/">DNS</a></strong> para entender cómo publicar registros SPF/DKIM/DMARC</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 - Material Didáctico Avanzado
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="mailto:contacto@example.com" target="_blank" rel="noopener" title="Contacto por correo" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4l208 156a48 48 0 0 0 57.6 0l208-156c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48zM0 196v188c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V196L313.6 344.8c-34.1 25.6-81.1 25.6-115.2 0z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "toc.follow", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

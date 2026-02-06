@@ -1,0 +1,143 @@
+site_name: Administración de Servicios de Correo Electrónico
+site_description: Documentación teórica profesional sobre la administración de sistemas de correo electrónico en entornos Linux
+site_author: Teodoro Sibón Jiménez y José Luis Cabello Pérez
+copyright: Copyright &copy; 2026 - Material Didáctico Avanzado
+
+theme:
+  name: material
+  language: es
+  
+  # Paleta de colores con toggle claro/oscuro
+  palette:
+    # Modo claro
+    - scheme: default
+      primary: teal
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Cambiar a modo oscuro
+    
+    # Modo oscuro
+    - scheme: slate
+      primary: teal
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Cambiar a modo claro
+  
+  # Tipografía profesional
+  font:
+    text: Roboto
+    code: Roboto Mono
+  
+  # Características avanzadas de navegación y UX
+  features:
+    # Navegación
+    - navigation.instant          # SPA - Navegación sin recarga
+    - navigation.instant.prefetch # Precarga de páginas
+    - navigation.instant.progress # Barra de progreso de carga
+    - navigation.tracking         # Actualiza URL con la sección actual
+    - navigation.tabs             # Tabs en la navegación principal
+    - navigation.tabs.sticky      # Tabs siempre visibles
+    - navigation.sections         # Secciones en el sidebar
+    - navigation.expand           # Expandir secciones automáticamente
+    - navigation.indexes          # Páginas índice para secciones
+    - navigation.top              # Botón "volver arriba"
+    
+    # Tabla de contenidos
+    - toc.follow                  # TOC sigue el scroll
+    - toc.integrate               # TOC integrado en navegación
+    
+    # Búsqueda
+    - search.suggest              # Sugerencias de búsqueda
+    - search.highlight            # Resalta términos buscados
+    - search.share                # Compartir resultados de búsqueda
+    
+    # Contenido
+    - content.code.copy           # Botón copiar en bloques de código
+    - content.code.annotate       # Anotaciones en código
+    - content.tabs.link           # Sincronizar tabs entre páginas
+
+# Navegación organizada por secciones temáticas
+nav:
+  - Inicio:
+    - Bienvenida: index.md
+    - Conceptos Básicos: conceptos_base.md
+  
+  - Arquitectura y Protocolos:
+    - Arquitectura del Sistema: arquitectura.md
+    - Protocolos de Comunicación: protocolos.md
+  
+  - Infraestructura:
+    - DNS y Correo Electrónico: dns_infraestructura.md
+    - Administración y Diagnóstico: administracion.md
+  
+  - Seguridad:
+    - Seguridad y Autenticación: seguridad.md
+
+# Plugins
+plugins:
+  - search:
+      lang: es
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+
+# Extensiones de Markdown
+markdown_extensions:
+  # Admonitions y bloques especiales
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  
+  # Tabs
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+  
+  # Resaltado de código
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  
+  # Formateo de texto
+  - pymdownx.mark          # ==marcado==
+  - pymdownx.caret         # ^^subrayado^^ y ^superíndice^
+  - pymdownx.tilde         # ~~tachado~~ y ~subíndice~
+  - pymdownx.keys          # ++ctrl+alt+del++
+  
+  # Íconos y emojis (solo para iconos técnicos, NO emoticonos)
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  
+  # Atributos y elementos HTML
+  - attr_list
+  - md_in_html
+  
+  # Tablas mejoradas
+  - tables
+  
+  # Listas de definiciones
+  - def_list
+  
+  # Notas al pie
+  - footnotes
+  
+  # Tabla de contenidos
+  - toc:
+      permalink: true
+      permalink_title: Enlace permanente
+      toc_depth: 3
+
+# Extra configuración
+extra:
+  social:
+    - icon: fontawesome/solid/envelope
+      link: mailto:contacto@example.com
+      name: Contacto por correo
