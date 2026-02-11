@@ -109,7 +109,9 @@ El docente realiza una demostración en vivo de:
 **Modalidad**: Parejas  
 **Evaluación**: Formativa (10% de la nota)
 
+
 ***Descanso*** (10-15 minutos)
+
 
 **Actividad Práctica 2 - Configuración de Servidor** (60-90 minutos)
 
