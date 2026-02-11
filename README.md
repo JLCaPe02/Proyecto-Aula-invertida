@@ -101,7 +101,6 @@ El docente realiza una demostración en vivo de:
 - Mail-Tester para analizar configuraciones
 - Cliente de correo (Thunderbird) para ver cabeceras
 
----
 ##### **3. Realización de Actividades Prácticas**
 
 **Actividad Práctica 1 - Análisis de Infraestructura** (45-60 minutos)
@@ -110,7 +109,7 @@ El docente realiza una demostración en vivo de:
 **Modalidad**: Parejas  
 **Evaluación**: Formativa (10% de la nota)
 
-**Descanso** (10-15 minutos)
+***Descanso*** (10-15 minutos)
 
 **Actividad Práctica 2 - Configuración de Servidor** (60-90 minutos)
 
