@@ -56,7 +56,7 @@ Este material está diseñado para aplicar la metodología de aula invertida sig
 
 - Acceso a la documentación MkDocs (online o archivo HTML estático)
 - Kahoot configurado con las 50 preguntas
-- Plataforma LMS (Moodle, Classroom, etc.) para comunicación
+- Recurso audiovisual (videos de YouTube)
 
 ---
 
@@ -101,78 +101,20 @@ El docente realiza una demostración en vivo de:
 - Mail-Tester para analizar configuraciones
 - Cliente de correo (Thunderbird) para ver cabeceras
 
-##### **3. Actividad Práctica 1 - Análisis de Infraestructura** (45-60 minutos)
+---
+##### **3. Realización de Actividades Prácticas**
 
-**Título**: "Auditoría de Configuración DNS para Correo Electrónico"
-
-**Descripción**:
-
-El alumnado debe analizar la infraestructura de correo de dominios reales asignados.
-
-**Tareas**:
-
-1. Identificar registros MX y sus prioridades
-2. Verificar existencia de SPF y validar su sintaxis
-3. Buscar registros DKIM (usando selectores comunes: `default`, `selector1`, `google`, etc.)
-4. Verificar política DMARC
-5. Realizar reverse DNS (PTR) de las IPs de los servidores MX
-6. Documentar hallazgos en una tabla comparativa
-
-**Dominios sugeridos**:
-
-- gmail.com (Google Workspace)
-- outlook.com (Microsoft 365)
-- yahoo.com
-- protonmail.com
-- Un dominio de una empresa local/regional
+**Actividad Práctica 1 - Análisis de Infraestructura** (45-60 minutos)
 
 **Entregable**: Documento con tabla comparativa y conclusiones sobre las buenas prácticas encontradas.
-
-**Tiempo**: 45-60 minutos  
 **Modalidad**: Parejas  
 **Evaluación**: Formativa (10% de la nota)
 
-##### **4. Descanso** (10-15 minutos)
+**Descanso** (10-15 minutos)
 
-##### **5. Actividad Práctica 2 - Configuración de Servidor** (60-90 minutos)
-
-**Título**: "Configuración Básica de Postfix y Dovecot"
-
-**Descripción**:
-
-Configurar un servidor de correo funcional en entorno virtualizado.
-
-**Prerequisitos técnicos**:
-
-- Máquina virtual Ubuntu Server o Debian
-- Acceso root
-- Conexión a Internet
-
-**Tareas**:
-
-1. Instalar Postfix y Dovecot
-2. Configurar parámetros básicos en `main.cf`:
-   - `myhostname`, `mydomain`, `myorigin`
-   - `inet_interfaces = all`
-   - `mydestination` para entrega local
-3. Crear usuarios de sistema para buzones
-4. Configurar Dovecot para acceso IMAP:
-   - `mail_location = maildir:~/Maildir`
-   - Habilitar protocolos imap
-5. Enviar correo de prueba local usando `mail` o `swaks`
-6. Leer correo usando cliente IMAP (Thunderbird o Evolution)
-7. Analizar logs en `/var/log/mail.log`
-
-**Checklist de validación**:
-
-- [ ] Postfix acepta conexiones en puerto 25
-- [ ] Dovecot acepta conexiones IMAP en puerto 143
-- [ ] Se puede enviar correo entre usuarios locales
-- [ ] Se puede leer correo con cliente IMAP
-- [ ] Los logs muestran entrega exitosa (código 250)
+**Actividad Práctica 2 - Configuración de Servidor** (60-90 minutos)
 
 **Entregable**: Capturas de pantalla de:
-
 1. Archivo `/etc/postfix/main.cf` configurado
 2. Salida de `postqueue -p` mostrando cola vacía
 3. Cliente de correo mostrando mensaje recibido
@@ -182,9 +124,8 @@ Configurar un servidor de correo funcional en entorno virtualizado.
 **Modalidad**: Individual o parejas  
 **Evaluación**: Formativa (15% de la nota)
 
----
 
-##### **6. Cierre y Síntesis** (10-15 minutos)
+##### **4. Cierre y Síntesis** (10-15 minutos)
 
 - Resumen de conceptos clave aprendidos
 - Responder últimas dudas
