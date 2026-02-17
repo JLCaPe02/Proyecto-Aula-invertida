@@ -1,7 +1,9 @@
 # Proyecto Aula Invertida: Administración de Servicios de Correo Electrónico
 
-**Alumno:** José Luis Cabello Pérez y Teodoro Sibón Jiménez
+**Alumnos:** José Luis Cabello Pérez y Teodoro Sibón Jiménez
+
 **Módulo:** Administración de Sistemas Informáticos en Red
+
 **Curso:** 2º ASIR
 
 ---
